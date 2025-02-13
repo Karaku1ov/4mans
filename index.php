@@ -9,31 +9,34 @@
     <title>Php website</title>
 </head>
 <body>
+<?php
+    require "blocks/delivery_methods.php";
+    $title = "Способы доставки";
+    require "blocks/header.php";
+?>
+
 <?php require"blocks/header.php"?>
 
 
 <div class="container mt-5"> 
-      <h3 class="mb-5">Наши статьи</h3>
+    <h3 class="mb-5">Способы доставки</h3>
     <div class="d-flex flex-wrap justify-content-center"> 
-        <?php for ($i = 0; $i < 5; $i++) : ?>   
+        <?php for ($i = 0; $i < count($delivery_methods); $i++) : ?>   
             <div class="card mb-4 rounded-3 shadow-sm" style="width: 18rem; margin: 10px;">
                 <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Text</h4>
+                    <h4 class="my-0 fw-normal"><?php echo $delivery_methods[$i]["title"]; ?></h4>
                 </div>
                 <div class="card-body">
                     <img src="img/<?php echo ($i + 1)?>.jpg" class="img-thumbnail">
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>10 users included</li>
-                        <li>2 GB of storage</li>
-                        <li>Email support</li>
-                        <li>Help center access</li>
-                    </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Подробнее</button>
+                    <p class="mt-3"><?php echo $delivery_methods[$i]["desc"]; ?></p>
+                    <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="window.location.href='details.php?id=<?php echo $i; ?>'">Подробнее</button>
+
                 </div>
             </div>
-        <?php endfor ?>
+        <?php endfor; ?>
     </div>
 </div>
+
 
 <?php require"blocks/footer.php"?>
 </body>
