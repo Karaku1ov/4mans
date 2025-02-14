@@ -12,7 +12,7 @@
 <?php
     require "blocks/delivery_methods.php";
     $title = "Способы доставки";
-    require "blocks/header.php";
+   
 ?>
 
 <?php require"blocks/header.php"?>
