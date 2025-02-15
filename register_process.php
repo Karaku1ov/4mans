@@ -1,29 +1,32 @@
 <?php
-require "db.php"; // Подключаем базу данных
+session_start();
+require 'db.php'; // Подключение к базе данных
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["username"]);
     $email = trim($_POST["email"]);
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Хешируем пароль
+    $password = trim($_POST["password"]);
 
-    // Проверяем, есть ли уже такой email в БД
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
-    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-    $stmt->execute();
+    // Проверяем, есть ли уже такой email
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+    $stmt->execute(['email' => $email]);
+
     if ($stmt->fetch()) {
-        die("Ошибка: Этот email уже зарегистрирован!");
+        echo "<script>alert('Этот email уже зарегистрирован!'); window.location.href='register.php';</script>";
+        exit();
     }
 
-    // Вставляем нового пользователя
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-    $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-    $stmt->bindParam(":password", $password, PDO::PARAM_STR);
     
-    if ($stmt->execute()) {
-        echo "Вы успешно зарегистрировались! <a href='login.php'>Войти</a>";
-    } else {
-        echo "Ошибка при регистрации!";
-    }
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+   
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+    $stmt->execute([
+        'username' => $username,
+        'email' => $email,
+        'password' => $hashedPassword
+    ]);
+
+    echo "<script>alert('Регистрация успешна! Теперь войдите.'); window.location.href='register_process.php';</script>";
 }
 ?>

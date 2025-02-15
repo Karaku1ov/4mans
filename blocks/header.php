@@ -1,13 +1,22 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 font-weight-normal">itProger</h5>
-    <div class="d-flex ms-auto align-items-center"> <nav class="my-2 my-md-0">
-            <a class="p-2 text-dark" href="#">Gargo</a>
-            <a class="p-2 text-dark" href="#">Контакты</a>
-        </nav>
-        <?php if(isset($_COOKIE['user']) && $_COOKIE['user'] != ''): ?>
-            <a class="btn btn-outline-primary ms-3" href="auth.php">Кабинет пользователя</a> 
-            <?php else: ?>
-                <a class="btn btn-outline-primary ms-3" href="auth.php">Войти</a> 
-         <?php endif; ?>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">4Mans Cargo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.php">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.php">О нас</a></li>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Личный кабинет</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php">Выйти</a></li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link" href="register.php">Регистрация</a></li>
+                    <li class="nav-item"><a class="nav-link" href="auth.php">Вход</a></li>
+                <?php endif; ?>
+            </ul>
         </div>
-</div>
+    </div>
+</nav>

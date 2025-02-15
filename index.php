@@ -1,23 +1,35 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/style.css">
+    <title>4Mans Cargo - Карго-доставка</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <title>Php website</title>
+   
 </head>
 <body>
-<?php
-    require "blocks/delivery_methods.php";
-    $title = "Способы доставки";
-   
-?>
+<link rel="stylesheet" href="css/style.css">
 
-<?php require"blocks/header.php"?>
+<?php require("blocks/header.php");?>
 
 
+<div class="hero">
+    <h1>Быстрая и надежная карго-доставка</h1>
+    <p>Доставляем товары из Китая, Европы, США и других стран</p>
+    <a href="register.php" class="btn btn-custom">Оставить заявку</a>
+</div>
+
+<div class="container">
+<section id="about" class="container mt-5">
+    <h2>О нас</h2>
+    <p>Компания 4Mans Cargo занимается международной карго-доставкой грузов, обеспечивая надежность, скорость и выгодные тарифы. Мы работаем с различными странами и предлагаем полный комплекс логистических услуг.</p>
+</section>
+</div>
+<?php require"blocks/delivery_methods.php"?>
 <div class="container mt-5"> 
     <h3 class="mb-5">Способы доставки</h3>
     <div class="d-flex flex-wrap justify-content-center"> 
@@ -37,7 +49,23 @@
     </div>
 </div>
 
+<section id="contact" class="container mt-5">
+    <h2>Свяжитесь с нами</h2>
+    <form action="send_message.php" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Ваш Email:</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Сообщение:</label>
+            <textarea name="message" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-custom">Отправить</button>
+    </form>
+</section>
 
-<?php require"blocks/footer.php"?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+<?php require("blocks/footer.php");?>
 </html>
